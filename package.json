@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port 8080",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "start": "nuxt start",

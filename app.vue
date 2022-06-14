@@ -1,32 +1,14 @@
+<script setup>
+  // HACK: SSR の際に vuetify が崩れるときがあるので、mount されるまで待つ
+  // もし他のとこでやばいことになったら外す
+  const isLoading = ref(true)
+  onMounted(() => {
+    isLoading.value = false
+  })
+</script>
+
 <template>
-  <div class="d-flex align-center flex-column">
-    <div class="text-subtitle-2">With props</div>
-    <v-card
-      width="400"
-      title="This is a title"
-      subtitle="This is a subtitle"
-      text="This is content"
-    ></v-card>
-
-    <div class="mt-4 text-subtitle-2">With slots</div>
-    <v-card width="400">
-      <template #title> This is a title </template>
-
-      <template #subtitle> This is a subtitle </template>
-
-      <template #text> This is content </template>
-    </v-card>
-
-    <div class="mt-4 text-subtitle-2">With markup</div>
-    <v-card width="400">
-      <v-card-header>
-        <v-card-header-text>
-          <v-card-title>This is a title</v-card-title>
-          <v-card-subtitle>This is a subtitle</v-card-subtitle>
-        </v-card-header-text>
-      </v-card-header>
-
-      <v-card-text> This is content </v-card-text>
-    </v-card>
-  </div>
+  <NuxtLayout v-if="!isLoading">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
