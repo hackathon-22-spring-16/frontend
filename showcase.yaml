@@ -4,7 +4,7 @@ work_dir: ./output
 entrypoint: yarn start
 http_proxy: 8080
 
-https: "hard"
+https: 'on'
 
 startup: |
   yarn --frozen-lockfile
