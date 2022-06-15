@@ -37,7 +37,9 @@ jobs:
           key: build-${{ github.sha }}
       - name: jobs failed
         if: failure()
-        run: 'curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :x: Setup failed\nhttps://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"'
+        run: |-
+          curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :x: Setup failed
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
 
   sync:
     needs: setup
@@ -71,7 +73,11 @@ jobs:
 
       - name: jobs success
         if: success()
-        run: 'curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :white_check_mark.ex-large: Jobs succeeded\nhttps://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"'
+        run: |-
+          curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :white_check_mark: Jobs succeeded
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
       - name: jobs failed
         if: failure()
-        run: 'curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :x: Sync failed\nhttps://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"'
+        run: |-
+          curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :x: Sync failed
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
