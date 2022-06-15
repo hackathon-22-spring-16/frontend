@@ -46,7 +46,11 @@ jobs:
           git config --local user.name "github"
       - name: change gitignore
         run: |
-          cat .gitignore | grep -v 'node_modules' | grep -v '.output' > .gitignore.tmp
+          cat .gitignore | grep -v 'node_modules' | grep -v '.output' > .gitignore
+      - name: commit (include build)
+        run: |
+          git add -A
+          git commit -m "[build] ${{ github.event.head_commit.id }}"
       - name: Push changes
         env:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
