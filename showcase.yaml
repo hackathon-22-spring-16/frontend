@@ -5,4 +5,6 @@ entrypoint: yarn start
 http_proxy: 8080
 
 https: 'on'
-internal: 'hard'
+# MEMO: https://portal.trap.jp/pipeline?redirect=http://trap.show に一回アクセスしないといけない
+# TODO: URL 確定したら redirect 先を変えて、どこかに追加する
+internal: 'soft'
