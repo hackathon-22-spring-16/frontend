@@ -30,11 +30,25 @@ jobs:
         run: yarn --check-files --frozen-lockfile --non-interactive
       - name: build
         run: yarn build
+      - name: cache build
+        uses: actions/cache@v2
+        with:
+          path: .output
+          key: build-${{ github.sha }}
 
   sync:
     needs: setup
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: restore cache
+        uses: actions/cache@v2
+        with:
+          path: .output
+          key: build-${{ github.sha }}
+
       - name: Set config
         run: |
           echo "${{ secrets.GITEA_TOKEN }}" > ~/deploy_key.pem
