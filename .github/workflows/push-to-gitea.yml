@@ -44,12 +44,9 @@ jobs:
           chmod 600 ~/deploy_key.pem
           git config --local user.email "github@actions"
           git config --local user.name "github"
-      - name: change gitignore
-        run: |
-          cat .gitignore | grep -v 'node_modules' | grep -v '.output' > .gitignore
       - name: commit (include build)
         run: |
-          git add -A
+          git add .output
           git commit -m "[build] ${{ github.event.head_commit.id }}"
       - name: Push changes
         env:
