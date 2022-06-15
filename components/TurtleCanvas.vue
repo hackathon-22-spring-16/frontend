@@ -183,12 +183,7 @@ const start = () => {
       }
     }
 
-    ctxTop.clearRect(
-      0,
-      0,
-      canvasTopRef.value.width,
-      canvasTopRef.value.height
-    )
+    ctxTop.clearRect(0, 0, canvasTopRef.value.width, canvasTopRef.value.height)
     ctxTop.fillStyle = '#000000'
     ctxTop.beginPath()
     ctxTop.moveTo(turtleState.x, turtleState.y)
@@ -209,7 +204,9 @@ const start = () => {
       await sleep(props.intervalMs)
     }
     if (isPause.value) {
-      const pausePromise = new Promise<boolean>(resolve => { pauseResolve.value = resolve })
+      const pausePromise = new Promise<boolean>(resolve => {
+        pauseResolve.value = resolve
+      })
       const isContinue = await pausePromise
       if (!isContinue) {
         return
