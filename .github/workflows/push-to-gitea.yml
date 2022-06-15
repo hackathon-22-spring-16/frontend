@@ -44,6 +44,9 @@ jobs:
           chmod 600 ~/deploy_key.pem
           git config --local user.email "github@actions"
           git config --local user.name "github"
+      - name: change gitignore
+        run: |
+          cat .gitignore | grep -v 'node_modules' | grep -v '.output' > .gitignore.tmp
       - name: Push changes
         env:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
