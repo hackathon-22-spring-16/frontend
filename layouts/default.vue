@@ -10,7 +10,7 @@ onMounted(() => {
     <v-app-bar class="app-bar">header
       <v-avatar>
         <img
-          :src="`https://q.trap.jp/api/1.0/public/icon/${headers['X-Showcase-User'] ?? 'traP'}`"
+          :src="`https://q.trap.jp/api/1.0/public/icon/${headers['x-showcase-user'] ?? 'traP'}`"
           alt=""
           height="128"
           width="128"
