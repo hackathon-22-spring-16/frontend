@@ -9,7 +9,7 @@ const drawInterval = ref(100)
 const isRunning = ref(false)
 
 const nextCommand = () => runCode(
-  'D,>,[-<+>]+++++++++++++++++++++++++++++++++++++++[f<l>+]',
+  'D,>,[-<+>]++++++++++++++++++++rrr[f<l>+++++]',
   'Fd'
 )
 
@@ -74,6 +74,7 @@ const toggleRunning = () => {
           :height="480"
           :algorithm="nextCommand"
           :interval-ms="drawInterval"
+          is-rainbow
         />
       </v-row>
     </v-card-text>
