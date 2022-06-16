@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { sleep } from '@/utils/sleep'
+import { makeRainbow } from '@/utils/color'
 
 export interface MoveForward {
   type: 'moveForward'
@@ -73,6 +74,7 @@ export interface Props {
   height: number
   algorithm: TurtleCommandGenerator
   intervalMs: number
+  isRainbow?: boolean
 }
 const props = defineProps<Props>()
 
@@ -99,12 +101,13 @@ const homePos = {
 const start = () => {
   runningJobNumber += 1
   const selfJobNumber = runningJobNumber
+  const colorNext = props.isRainbow ? makeRainbow() : () => 'black'
   const turtleState: TurtleState = {
     x: homePos.x,
     y: homePos.y,
     directionDeg: 0,
     penDown: false,
-    color: 'hsl(0, 50%, 70%)',
+    color: colorNext(),
   }
   const algorithm = props.algorithm()
   if (canvasRef.value === null || canvasTopRef.value === null) {
@@ -127,6 +130,8 @@ const start = () => {
       return
     }
     const nextCommand = nextCommandResult.value
+
+    turtleState.color = colorNext()
 
     switch (nextCommand.type) {
       case 'penColor': {
