@@ -8,17 +8,6 @@ const drawInterval = ref(100)
 
 const isRunning = ref(false)
 
-const colorManagers = () => {
-  let arg = Math.floor(Math.random() * 360)
-  const next = () => {
-    arg += 1
-    arg %= 360
-    return `hsl(${arg}, 50%, 70%)`
-  }
-  return {
-    next,
-  }
-}
 const nextCommand = () => runCode(
   'D,>,[-<+>]+++++++++++++++++++++++++++++++++++++++[f<l>+]',
   'Fd'
