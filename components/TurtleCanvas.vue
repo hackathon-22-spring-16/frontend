@@ -347,6 +347,9 @@ defineExpose({
     left: 0;
 
     border: 1px solid #ccc;
+    &.top-layer {
+      pointer-events: none;
+    }
   }
 }
 </style>
