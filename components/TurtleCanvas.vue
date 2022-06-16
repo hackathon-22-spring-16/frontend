@@ -103,12 +103,13 @@ const start = () => {
   const selfJobNumber = runningJobNumber
   const colorNext = props.isRainbow ? makeRainbow() : () => 'black'
   const turtleState: TurtleState = {
-    x: homePos.x,
-    y: homePos.y,
+    x: 0,
+    y: 0,
     directionDeg: 0,
     penDown: false,
     color: colorNext(),
   }
+  const distanceMag = 2
   const algorithm = props.algorithm()
   if (canvasRef.value === null || canvasTopRef.value === null) {
     return
@@ -208,8 +209,8 @@ const start = () => {
             break
           }
           case 'home': {
-            nextPos.x = homePos.x
-            nextPos.y = homePos.y
+            nextPos.x = 0
+            nextPos.y = 0
             break
           }
           default: {
@@ -220,11 +221,20 @@ const start = () => {
 
         ctx.beginPath()
         ctx.strokeStyle = turtleState.color
-        ctx.moveTo(turtleState.x, turtleState.y)
+        ctx.moveTo(
+          homePos.x + turtleState.x * distanceMag,
+          homePos.y + turtleState.y * distanceMag
+        )
         if (turtleState.penDown) {
-          ctx.lineTo(nextPos.x, nextPos.y)
+          ctx.lineTo(
+            homePos.x + nextPos.x * distanceMag,
+            homePos.y + nextPos.y * distanceMag
+          )
         } else {
-          ctx.moveTo(nextPos.x, nextPos.y)
+          ctx.moveTo(
+            homePos.x + nextPos.x * distanceMag,
+            homePos.y + nextPos.y * distanceMag
+          )
         }
         ctx.stroke()
 
@@ -241,16 +251,30 @@ const start = () => {
     ctxTop.clearRect(0, 0, canvasTopRef.value.width, canvasTopRef.value.height)
     ctxTop.fillStyle = '#000000'
     ctxTop.beginPath()
-    ctxTop.moveTo(turtleState.x, turtleState.y)
-    ctxTop.lineTo(
-      turtleState.x + 10 * cosDeg(turtleState.directionDeg + 150),
-      turtleState.y + 10 * sinDeg(turtleState.directionDeg + 150)
+    ctxTop.moveTo(
+      homePos.x + turtleState.x * distanceMag,
+      homePos.y + turtleState.y * distanceMag
     )
     ctxTop.lineTo(
-      turtleState.x + 10 * cosDeg(turtleState.directionDeg - 150),
-      turtleState.y + 10 * sinDeg(turtleState.directionDeg - 150)
+      homePos.x +
+        turtleState.x * distanceMag +
+        10 * cosDeg(turtleState.directionDeg + 150),
+      homePos.y +
+        turtleState.y * distanceMag +
+        10 * sinDeg(turtleState.directionDeg + 150)
     )
-    ctxTop.lineTo(turtleState.x, turtleState.y)
+    ctxTop.lineTo(
+      homePos.x +
+        turtleState.x * distanceMag +
+        10 * cosDeg(turtleState.directionDeg - 150),
+      homePos.y +
+        turtleState.y * distanceMag +
+        10 * sinDeg(turtleState.directionDeg - 150)
+    )
+    ctxTop.lineTo(
+      homePos.x + turtleState.x * distanceMag,
+      homePos.y + turtleState.y * distanceMag
+    )
     ctxTop.fill()
 
     if (props.intervalMs === 0) {
