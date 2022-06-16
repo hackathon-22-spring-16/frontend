@@ -22,6 +22,17 @@ export interface SetPos {
   x: number
   y: number
 }
+export interface SetX {
+  type: 'setX'
+  x: number
+}
+export interface SetY {
+  type: 'setY'
+  y: number
+}
+export interface Home {
+  type: 'home'
+}
 export interface SetDirection {
   type: 'setDirection'
   directionDeg: number
@@ -43,6 +54,9 @@ export type TurtleCommand =
   | TurnRight
   | TurnLeft
   | SetPos
+  | SetX
+  | SetY
+  | Home
   | SetDirection
   | PenUp
   | PenDown
@@ -78,12 +92,16 @@ interface TurtleState {
 const cosDeg = (deg: number) => Math.cos((deg * Math.PI) / 180)
 const sinDeg = (deg: number) => Math.sin((deg * Math.PI) / 180)
 let runningJobNumber = 0
+const homePos = {
+  x: 200,
+  y: 320,
+}
 const start = () => {
   runningJobNumber += 1
   const selfJobNumber = runningJobNumber
   const turtleState: TurtleState = {
-    x: 200,
-    y: 320,
+    x: homePos.x,
+    y: homePos.y,
     directionDeg: 0,
     penDown: false,
     color: 'hsl(0, 50%, 70%)',
@@ -152,20 +170,47 @@ const start = () => {
       }
       case 'moveForward':
       case 'moveBackward':
-      case 'setPos': {
+      case 'setPos':
+      case 'setX':
+      case 'setY':
+      case 'home': {
         const nextPos = {
           x: turtleState.x,
           y: turtleState.y,
         }
-        if (nextCommand.type === 'moveForward') {
-          nextPos.x += nextCommand.distance * cosDeg(turtleState.directionDeg)
-          nextPos.y += nextCommand.distance * sinDeg(turtleState.directionDeg)
-        } else if (nextCommand.type === 'moveBackward') {
-          nextPos.x -= nextCommand.distance * cosDeg(turtleState.directionDeg)
-          nextPos.y -= nextCommand.distance * sinDeg(turtleState.directionDeg)
-        } else if (nextCommand.type === 'setPos') {
-          nextPos.x = nextCommand.x
-          nextPos.y = nextCommand.y
+        switch (nextCommand.type) {
+          case 'moveForward': {
+            nextPos.x += cosDeg(turtleState.directionDeg) * nextCommand.distance
+            nextPos.y += sinDeg(turtleState.directionDeg) * nextCommand.distance
+            break
+          }
+          case 'moveBackward': {
+            nextPos.x -= cosDeg(turtleState.directionDeg) * nextCommand.distance
+            nextPos.y -= sinDeg(turtleState.directionDeg) * nextCommand.distance
+            break
+          }
+          case 'setPos': {
+            nextPos.x = nextCommand.x
+            nextPos.y = nextCommand.y
+            break
+          }
+          case 'setX': {
+            nextPos.x = nextCommand.x
+            break
+          }
+          case 'setY': {
+            nextPos.y = nextCommand.y
+            break
+          }
+          case 'home': {
+            nextPos.x = homePos.x
+            nextPos.y = homePos.y
+            break
+          }
+          default: {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const unhandledCommand: never = nextCommand
+          }
         }
 
         ctx.beginPath()
