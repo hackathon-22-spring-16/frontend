@@ -2,12 +2,14 @@ import { transpile, TranspilerExpr } from './transpiler'
 import { convertToTurtleCommand } from './convertToTurtleCommand'
 import { TurtleCommand } from '@/components/TurtleCanvas.vue'
 
+const byteMax = 2048
+
 type Byte = number
 const addAsByte = (a: Byte, b: number): Byte => {
   let sum = a + b
-  sum %= 256
+  sum %= byteMax
   if (sum < 0) {
-    sum += 256
+    sum += byteMax
   }
   return sum
 }
@@ -38,8 +40,8 @@ export const runCode: (
   const stdinAsBytes = new TextEncoder().encode(stdin)
   const state: State = {
     ptr: 0,
-    memory_non_negative: new Array(256).fill(0),
-    memory_negative: new Array(256).fill(0),
+    memory_non_negative: new Array(byteMax).fill(0),
+    memory_negative: new Array(byteMax).fill(0),
     idx: 0,
     transpiled,
     inputIdx: 0,
