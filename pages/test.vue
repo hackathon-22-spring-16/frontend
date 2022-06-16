@@ -1,6 +1,7 @@
 <script setup>
 const res = await useFetch('https://back-end.hackathon-22-spring-16.trap.show/echo', {
-  headers: useRequestHeaders([('cookie')]) || useCookies()
+  headers: useRequestHeaders([('cookie')]) || useCookies(),
+  credentials: 'include',
 })
 onMounted(async () => {
   console.log('response', res.value)
@@ -11,7 +12,9 @@ onMounted(async () => {
   console.log('response.data', res.data.value)
 })
 const onClick = async () => {
-  const { data } = await useFetch('https://back-end.hackathon-22-spring-16.trap.show/echo')
+  const { data } = await useFetch('https://back-end.hackathon-22-spring-16.trap.show/echo', {
+    credentials: 'include',
+  })
   console.log('response', data.value)
 }
 </script>
