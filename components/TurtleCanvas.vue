@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sleep } from '~~/utils/sleep'
+import { sleep } from '@/utils/sleep'
 
 export interface MoveForward {
   type: 'moveForward'
