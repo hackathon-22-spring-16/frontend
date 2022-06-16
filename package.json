@@ -8,11 +8,11 @@
     "url": "https://github.com/hackathon-22-spring-16/frontend.git"
   },
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev --port 8080",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "start": "nuxt start",
+    "build": "nuxi build",
+    "dev": "nuxi dev --port 8080",
+    "generate": "nuxi generate",
+    "preview": "nuxi preview",
+    "start": "nuxi start",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint --ext .js,.ts,.vue .",
     "lint:prettier": "prettier '**/*.{js,ts,vue}' --check --ignore-path .gitignore",
