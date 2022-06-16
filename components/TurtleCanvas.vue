@@ -95,7 +95,7 @@ const cosDeg = (deg: number) => Math.cos((deg * Math.PI) / 180)
 const sinDeg = (deg: number) => Math.sin((deg * Math.PI) / 180)
 let runningJobNumber = 0
 const homePos = {
-  x: 200,
+  x: 320,
   y: 320,
 }
 const start = () => {
