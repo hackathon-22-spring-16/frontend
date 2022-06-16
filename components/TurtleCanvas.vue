@@ -180,6 +180,11 @@ const start = () => {
 
         turtleState.x = nextPos.x
         turtleState.y = nextPos.y
+        break
+      }
+      default: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const unhandledCommand: never = nextCommand
       }
     }
 
