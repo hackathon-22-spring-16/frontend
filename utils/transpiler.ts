@@ -109,8 +109,10 @@ export const transpile = (code: string): TranspilerExpr[] | string => {
         if (/^[a-zA-Z]$/.test(c)) {
           popLastExpr()
           transpiled.push({ type: 'turtle-command', command: c })
+        } else if (/^\s$/.test(c)) {
+          continue
         } else {
-          return `Error: unknown character ${c} at ${i}`
+          return `Error: Unknown character ${c} at ${i}`
         }
       }
     }
