@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import TurtleCanvas, {
-  TurtleCommandGenerator,
-} from '@/components/TurtleCanvas.vue'
+import { runCode } from '@/utils/runCode';
+import TurtleCanvas from '@/components/TurtleCanvas.vue';
 
 const turtleCanvas = ref<InstanceType<typeof TurtleCanvas> | null>(null)
 
@@ -20,37 +19,10 @@ const colorManagers = () => {
     next,
   }
 }
-const nextCommand: TurtleCommandGenerator = function* () {
-  const colorManager = colorManagers()
-  let nowDistance = 100
-  yield {
-    type: 'penUp',
-  }
-  yield {
-    type: 'setPos',
-    x: 200,
-    y: 320,
-  }
-  yield {
-    type: 'penDown',
-  }
-
-  while (true) {
-    yield {
-      type: 'penColor',
-      color: colorManager.next(),
-    }
-    yield {
-      type: 'moveForward',
-      distance: nowDistance,
-    }
-    yield {
-      type: 'turnLeft',
-      angleDeg: 170,
-    }
-    nowDistance += 10
-  }
-}
+const nextCommand = () => runCode(
+  'D,>,[-<+>]+++++++++++++++++++++++++++++++++++++++[f<l>+]',
+  'Fd'
+)
 
 const stop = () => {
   isRunning.value = false
