@@ -41,8 +41,8 @@ const start = () => {
       ctx.beginPath()
       ctx.moveTo(nowPos.x, nowPos.y)
       const nextPos = {
-        x: nowPos.x + nowCount * Math.cos(nowDirection * Math.PI / 180),
-        y: nowPos.y + nowCount * Math.sin(nowDirection * Math.PI / 180),
+        x: nowPos.x + nowCount * Math.cos((nowDirection * Math.PI) / 180),
+        y: nowPos.y + nowCount * Math.sin((nowDirection * Math.PI) / 180),
       }
       ctx.strokeStyle = cm.next()
       ctx.lineTo(nextPos.x, nextPos.y)
@@ -53,12 +53,23 @@ const start = () => {
       nowCount += 10
       nowPos = nextPos
 
-      ctxTop.clearRect(0, 0, canvasTopRef.value.width, canvasTopRef.value.height)
+      ctxTop.clearRect(
+        0,
+        0,
+        canvasTopRef.value.width,
+        canvasTopRef.value.height
+      )
       ctxTop.fillStyle = '#000000'
       ctxTop.beginPath()
       ctxTop.moveTo(nowPos.x, nowPos.y)
-      ctxTop.lineTo(nowPos.x + 10 * Math.cos((nowDirection + 150) * Math.PI / 180), nowPos.y + 10 * Math.sin((nowDirection + 150) * Math.PI / 180))
-      ctxTop.lineTo(nowPos.x + 10 * Math.cos((nowDirection + 210) * Math.PI / 180), nowPos.y + 10 * Math.sin((nowDirection + 210) * Math.PI / 180))
+      ctxTop.lineTo(
+        nowPos.x + 10 * Math.cos(((nowDirection + 150) * Math.PI) / 180),
+        nowPos.y + 10 * Math.sin(((nowDirection + 150) * Math.PI) / 180)
+      )
+      ctxTop.lineTo(
+        nowPos.x + 10 * Math.cos(((nowDirection + 210) * Math.PI) / 180),
+        nowPos.y + 10 * Math.sin(((nowDirection + 210) * Math.PI) / 180)
+      )
       ctxTop.lineTo(nowPos.x, nowPos.y)
       ctxTop.fill()
 
@@ -92,7 +103,13 @@ const stop = () => {
       </v-row>
       <v-row>
         <v-col cols="6">
-          <v-slider v-model="drawInterval" :min="0" :max="1000" :step="100" thumb-label>
+          <v-slider
+            v-model="drawInterval"
+            :min="0"
+            :max="1000"
+            :step="100"
+            thumb-label
+          >
             <template #append>
               <v-text-field
                 v-model="drawInterval"
@@ -109,7 +126,12 @@ const stop = () => {
       <v-row>
         <div class="canvas-container">
           <canvas ref="canvasRef" width="640" height="480" class="canvas" />
-          <canvas ref="canvasTopRef" width="640" height="480" class="canvas top-layer" />
+          <canvas
+            ref="canvasTopRef"
+            width="640"
+            height="480"
+            class="canvas top-layer"
+          />
         </div>
       </v-row>
     </v-card-text>
