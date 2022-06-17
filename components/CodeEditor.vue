@@ -1,3 +1,7 @@
+<script setup>
+import { Codemirror } from 'vue-codemirror'
+</script>
+
 <template>
   <div id="app">
     <v-toolbar
@@ -28,10 +32,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { Codemirror } from 'vue-codemirror'
-</script>
 
 <style scoped>
 .exe_button {
