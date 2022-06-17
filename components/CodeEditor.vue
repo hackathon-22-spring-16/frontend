@@ -15,15 +15,10 @@
 
     <codemirror
       v-model="code"
-      placeholder=""
       :style="{ height: '400px', width: '700px', color: 'green' }"
       :autofocus="true"
       :indent-with-tab="true"
       :tab-size="1"
-      :extensions="extensions"
-      @ready="log('ready', $event)"
-      @focus="log('focus', $event)"
-      @blur="log('blur', $event)"
     />
 
     <div>
