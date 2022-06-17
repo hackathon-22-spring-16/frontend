@@ -14,27 +14,25 @@
     </v-toolbar>
 
     <codemirror
-    v-model="code"
-    placeholder=""
-    :style="{ height: '400px', width: '700px', color:'green'}"
-    :autofocus="true"
-    :indent-with-tab="true"
-    :tab-size="1"
-    :extensions="extensions"
-    @ready="log('ready', $event)"
-    @focus="log('focus', $event)"
-    @blur="log('blur', $event)"
-  />
+      v-model="code"
+      placeholder=""
+      :style="{ height: '400px', width: '700px', color: 'green' }"
+      :autofocus="true"
+      :indent-with-tab="true"
+      :tab-size="1"
+      :extensions="extensions"
+      @ready="log('ready', $event)"
+      @focus="log('focus', $event)"
+      @blur="log('blur', $event)"
+    />
 
-  <div>
-    <v-btn class="exe_button" rounded color="primary" padding="100px">実行</v-btn>
+    <div>
+      <v-btn class="exe_button" rounded color="primary" padding="100px"
+        >実行</v-btn
+      >
+    </div>
   </div>
-
-  </div>
-  
 </template>
-
-
 
 <script setup>
 import { Codemirror } from 'vue-codemirror'
@@ -42,7 +40,7 @@ import { Codemirror } from 'vue-codemirror'
 
 <style scoped>
 .exe_button {
-  padding-right:40px;
-  padding-left:40px;
+  padding-right: 40px;
+  padding-left: 40px;
 }
 </style>
