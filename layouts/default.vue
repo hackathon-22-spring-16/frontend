@@ -7,26 +7,36 @@ onMounted(() => {
 
 <template>
   <v-app>
-    <v-app-bar class="app-bar"
-      >header
-      <v-avatar>
-        <img
-          :src="`https://q.trap.jp/api/1.0/public/icon/${
-            headers['x-showcase-user'] ?? 'traP'
-          }`"
-          alt=""
-          height="128"
-          width="128"
-          class="icon-img"
-        />
-      </v-avatar>
-      to: {{ headers['host'] }}
+    <v-app-bar>
+      <div class="app-bar-contents">
+        <nuxt-link to="/">
+          サービス名
+        </nuxt-link>
+
+        <v-avatar>
+          <img
+            :src="`https://q.trap.jp/api/1.0/public/icon/${
+              headers['x-showcase-user'] ?? 'traP'
+            }`"
+            alt=""
+            height="128"
+            width="128"
+            class="icon-img"
+          />
+        </v-avatar>
+      </div>
     </v-app-bar>
     <v-main class="main"> content <slot /></v-main>
   </v-app>
 </template>
 
 <style lang="scss" scoped>
+.app-bar-contents {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
 .icon-img {
   height: 100%;
   width: 100%;
