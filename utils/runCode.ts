@@ -43,8 +43,8 @@ export const runCode: (
   const stdinAsBytes = new TextEncoder().encode(stdin)
   const state: State = {
     ptr: 0,
-    memory_non_negative: new Array(cellMax).fill(0),
-    memory_negative: new Array(cellMax).fill(0),
+    memory_non_negative: new Array(512).fill(0),
+    memory_negative: new Array(512).fill(0),
     idx: 0,
     transpiled,
     inputIdx: 0,
