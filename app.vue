@@ -5,10 +5,19 @@ const isLoading = ref(true)
 onMounted(() => {
   isLoading.value = false
 })
+const { data: serverHeaders } = await useAsyncData(
+  'get-request-header',
+  async () => {
+    const headers = useRequestHeaders()
+    await null
+    return headers
+  }
+)
+useHeadersWithDefault(serverHeaders)
 </script>
 
 <template>
-  <NuxtLayout v-if="!isLoading">
+  <NuxtLayout v-show="!isLoading">
     <NuxtPage />
   </NuxtLayout>
 </template>

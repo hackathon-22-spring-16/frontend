@@ -8,22 +8,76 @@ on:
 
 env:
   GITEA_SSH_URL: 'ssh://git@git.trap.jp:2200/hackathon-22-spring-16/front-end.git'
+  NODE_VERSION: '17.3.1'
 
 jobs:
-  sync:
+  setup: # install + build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: set node version
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-v${{ env.NODE_VERSION }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+      - name: install
+        run: yarn --check-files --frozen-lockfile --non-interactive
+      - name: build
+        run: yarn build
+      - name: cache build
+        uses: actions/cache@v2
+        with:
+          path: .output
+          key: build-${{ github.sha }}
+      - name: jobs failed
+        if: failure()
+        run: |-
+          curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :x: Setup failed
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+
+  sync:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: restore cache
+        uses: actions/cache@v2
+        with:
+          path: .output
+          key: build-${{ github.sha }}
+
       - name: Set config
         run: |
           echo "${{ secrets.GITEA_TOKEN }}" > ~/deploy_key.pem
           chmod 600 ~/deploy_key.pem
           git config --local user.email "github@actions"
           git config --local user.name "github"
+      - name: commit (include build)
+        run: |
+          git add .output -f
+          git commit -m "[build] ${{ github.event.head_commit.id }}"
       - name: Push changes
         env:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
         run: |
           git fetch --unshallow origin
           git push -f ${{ env.GITEA_SSH_URL }} main:master
+
+      - name: jobs success
+        if: success()
+        run: |-
+          curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :white_check_mark: Jobs succeeded
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
+      - name: jobs failed
+        if: failure()
+        run: |-
+          curl ${{ secrets.WEBHOOK_URL }} -X POST -H "Content-Type: text/plain" --data "### :x: Sync failed
+          https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}"
