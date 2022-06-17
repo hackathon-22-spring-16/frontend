@@ -6,6 +6,7 @@
     "vue.volar",
     "vue.vscode-typescript-vue-plugin",
     "eg2.vscode-npm-script",
-    "syler.sass-indented"
+    "syler.sass-indented",
+    "tamuratak.vscode-lezer"
   ]
 }
