@@ -295,50 +295,6 @@
     "@codemirror/view" "^6.0.0"
     "@lezer/common" "^1.0.0"
 
-"@codemirror/lang-css@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/lang-css/-/lang-css-6.0.0.tgz#e66d087a4e52e334da4f5b3dfab47dbbdc5f6b15"
-  integrity sha512-jBqc+BTuwhNOTlrimFghLlSrN6iFuE44HULKWoR4qKYObhOIl9Lci1iYj6zMIte1XTQmZguNvjXMyr43LUKwSw==
-  dependencies:
-    "@codemirror/autocomplete" "^6.0.0"
-    "@codemirror/language" "^6.0.0"
-    "@codemirror/state" "^6.0.0"
-    "@lezer/css" "^1.0.0"
-
-"@codemirror/lang-html@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/lang-html/-/lang-html-6.0.0.tgz#0d24124af51c959433af45155a019d18ac26e958"
-  integrity sha512-MnbRHUJVcv5vel64MeHZjdu1gWy+t2b3z8IU1/hieyFFR+kBXbZtq9+GJNrDc529s+HPVnA+V0RfIiyDIftv7Q==
-  dependencies:
-    "@codemirror/autocomplete" "^6.0.0"
-    "@codemirror/lang-css" "^6.0.0"
-    "@codemirror/lang-javascript" "^6.0.0"
-    "@codemirror/language" "^6.0.0"
-    "@codemirror/state" "^6.0.0"
-    "@lezer/common" "^1.0.0"
-    "@lezer/html" "^1.0.0"
-
-"@codemirror/lang-javascript@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/lang-javascript/-/lang-javascript-6.0.0.tgz#ae23b623456d333ca175f7f9801824426a113aed"
-  integrity sha512-IQLfR+pgydwLxP3AQYOhjGfLWlAZz5SEH+M1tnUXVvp2+KZhn3iDTQX/7HZgoJ3w0oySKOxPjdq6jmkTCW6/sg==
-  dependencies:
-    "@codemirror/autocomplete" "^6.0.0"
-    "@codemirror/language" "^6.0.0"
-    "@codemirror/lint" "^6.0.0"
-    "@codemirror/state" "^6.0.0"
-    "@codemirror/view" "^6.0.0"
-    "@lezer/common" "^1.0.0"
-    "@lezer/javascript" "^1.0.0"
-
-"@codemirror/lang-json@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/lang-json/-/lang-json-6.0.0.tgz#6ac373248c2d44ceab6d5d58879cc543095e503e"
-  integrity sha512-DvTcYTKLmg2viADXlTdufrT334M9jowe1qO02W28nvm+nejcvhM5vot5mE8/kPrxYw/HJHhwu1z2PyBpnMLCNQ==
-  dependencies:
-    "@codemirror/language" "^6.0.0"
-    "@lezer/json" "^1.0.0"
-
 "@codemirror/language@6.x", "@codemirror/language@^6.0.0":
   version "6.0.0"
   resolved "https://registry.npmjs.org/@codemirror/language/-/language-6.0.0.tgz"
@@ -470,44 +426,12 @@
   resolved "https://registry.npmjs.org/@lezer/common/-/common-1.0.0.tgz"
   integrity sha512-ohydQe+Hb+w4oMDvXzs8uuJd2NoA3D8YDcLiuDsLqH+yflDTPEpgCsWI3/6rH5C3BAedtH1/R51dxENldQceEA==
 
-"@lezer/css@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@lezer/css/-/css-1.0.0.tgz#c473ea969238a36889533cb733b75539083a326d"
-  integrity sha512-616VqgDKumHmYIuxs3tnX1irEQmoDHgF/TlP4O5ICWwyHwLMErq+8iKVuzTkOdBqvYAVmObqThcDEAaaMJjAdg==
-  dependencies:
-    "@lezer/highlight" "^1.0.0"
-    "@lezer/lr" "^1.0.0"
-
 "@lezer/highlight@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@lezer/highlight/-/highlight-1.0.0.tgz"
   integrity sha512-nsCnNtim90UKsB5YxoX65v3GEIw3iCHw9RM2DtdgkiqAbKh9pCdvi8AWNwkYf10Lu6fxNhXPpkpHbW6mihhvJA==
   dependencies:
     "@lezer/common" "^1.0.0"
-
-"@lezer/html@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@lezer/html/-/html-1.0.0.tgz#2117852c4ed76993575283f825bbea76c160f649"
-  integrity sha512-wZHBcieArLTxEi198hqRBBHMySzDKo5suWaESdUw0t44IXp01vkSRwX2brG1qBbKdwJ+C6U0iMl00vWNiyAROg==
-  dependencies:
-    "@lezer/highlight" "^1.0.0"
-    "@lezer/lr" "^1.0.0"
-
-"@lezer/javascript@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@lezer/javascript/-/javascript-1.0.0.tgz#60f0b6c295ef526a51fb33603403daad452d9470"
-  integrity sha512-RawBSrMD9yrVdrXWKn7hqo5BqgBaFelUx80i6p2/V0f+0THjncSSrRC6v3QWVv++RpqWT59L8ujKZjlExJq9xw==
-  dependencies:
-    "@lezer/highlight" "^1.0.0"
-    "@lezer/lr" "^1.0.0"
-
-"@lezer/json@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@lezer/json/-/json-1.0.0.tgz#848ad9c2c3e812518eb02897edd5a7f649e9c160"
-  integrity sha512-zbAuUY09RBzCoCA3lJ1+ypKw5WSNvLqGMtasdW6HvVOqZoCpPr8eWrsGnOVWGKGn8Rh21FnrKRVlJXrGAVUqRw==
-  dependencies:
-    "@lezer/highlight" "^1.0.0"
-    "@lezer/lr" "^1.0.0"
 
 "@lezer/lr@^1.0.0":
   version "1.0.0"
