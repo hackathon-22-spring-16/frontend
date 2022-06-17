@@ -1,4 +1,4 @@
-import { plainCommands } from "./convertToTurtleCommand"
+import { plainCommands } from './convertToTurtleCommand'
 
 export interface IncPtr {
   type: 'inc-ptr'
@@ -38,7 +38,10 @@ export const transpile = (code: string): TranspilerExpr[] | string => {
   const popLastExpr = () => {
     if (lastExpr !== null) {
       // delta が 0 の場合は何もしなくてよい
-      if ((lastExpr.type === 'inc-ptr' || lastExpr.type === 'inc-val') && lastExpr.delta === 0) {
+      if (
+        (lastExpr.type === 'inc-ptr' || lastExpr.type === 'inc-val') &&
+        lastExpr.delta === 0
+      ) {
         lastExpr = null
         return
       }

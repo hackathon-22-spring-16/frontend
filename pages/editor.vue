@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { runCode } from '@/utils/runCode';
-import TurtleCanvas from '@/components/TurtleCanvas.vue';
+import { runCode } from '@/utils/runCode'
+import TurtleCanvas from '@/components/TurtleCanvas.vue'
 
 const turtleCanvas = ref<InstanceType<typeof TurtleCanvas> | null>(null)
 
@@ -8,10 +8,11 @@ const drawInterval = ref(100)
 
 const isRunning = ref(false)
 
-const nextCommand = () => runCode(
-  'D,>,[-<+>]{F + d で 170 が入る (角度として使う)}++++++++++++++++++++{+20}rrr{位置調整}[f<l>+++++]{長さを増やしながら回転}',
-  'Fd'
-)
+const nextCommand = () =>
+  runCode(
+    'D,>,[-<+>]{F + d で 170 が入る (角度として使う)}++++++++++++++++++++{+20}rrr{位置調整}[f<l>+++++]{長さを増やしながら回転}',
+    'Fd'
+  )
 
 const stop = () => {
   isRunning.value = false

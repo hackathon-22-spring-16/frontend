@@ -251,8 +251,14 @@ const start = () => {
       }
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    ctxTop.clearRect(0, 0, canvasTopRef.value!.width, canvasTopRef.value!.height)
+    ctxTop.clearRect(
+      0,
+      0,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      canvasTopRef.value!.width,
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      canvasTopRef.value!.height
+    )
     ctxTop.fillStyle = '#000000'
     ctxTop.beginPath()
     ctxTop.moveTo(
