@@ -4,28 +4,27 @@ export const convertToTurtleCommand = (
   command: string,
   val: number
 ): TurtleCommand => {
-  switch (command) {
-    case 'f':
-      return { type: 'moveForward', distance: val }
-    case 'b':
-      return { type: 'moveBackward', distance: val }
-    case 'l':
-      return { type: 'turnLeft', angleDeg: val }
-    case 'r':
-      return { type: 'turnRight', angleDeg: val }
-    case 'x':
-      return { type: 'setX', x: val }
-    case 'y':
-      return { type: 'setY', y: val }
-    case 'h':
-      return { type: 'home' }
-    case 'd':
-      return { type: 'setDirection', directionDeg: val }
-    case 'U':
-      return { type: 'penUp' }
-    case 'D':
-      return { type: 'penDown' }
-    default:
-      throw new Error(`Unknown command: ${command}`)
+  const func = command !== '_NEVER_USED_' ? convertMap.get(command) : undefined
+  if (func === undefined) {
+    throw new Error(`Unknown command: ${command}`)
   }
+  return func(val)
 }
+
+export const convertMap: Map<string, (val: number) => TurtleCommand> = new Map([
+  ['f', val => ({ type: 'moveForward', distance: val })],
+  ['b', val => ({ type: 'moveBackward', distance: val })],
+  ['l', val => ({ type: 'turnLeft', angleDeg: val })],
+  ['r', val => ({ type: 'turnRight', angleDeg: val })],
+  ['x', val => ({ type: 'setX', x: val })],
+  ['y', val => ({ type: 'setY', y: val })],
+  ['h', _val => ({ type: 'home' })],
+  ['d', val => ({ type: 'setDirection', directionDeg: val })],
+  ['U', _val => ({ type: 'penUp' })],
+  ['D', _val => ({ type: 'penDown' })],
+  /* HACK: :tabun: 共変性とかの関係で、これがないと TypeScript はエラーになる */
+  [
+    '_NEVER_USED_',
+    _val => ({ type: '_NEVER_USED_' } as unknown as TurtleCommand),
+  ],
+])
