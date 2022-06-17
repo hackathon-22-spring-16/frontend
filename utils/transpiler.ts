@@ -46,9 +46,32 @@ export const transpile = (code: string): TranspilerExpr[] | string => {
       lastExpr = null
     }
   }
+  // {...comment...} か # comment でコメントを書けるようにした
+  let isInComment = false
+  let isOneLineComment = false
   for (let i = 0; i < code.length; i++) {
     const c = code[i]
+    if (isInComment) {
+      if (c === '}') {
+        isInComment = false
+      }
+      continue
+    }
+    if (isOneLineComment) {
+      if (c === '\n') {
+        isOneLineComment = false
+      }
+      continue
+    }
     switch (c) {
+      case '{': {
+        isInComment = true
+        break
+      }
+      case '#': {
+        isOneLineComment = true
+        break
+      }
       case '>': {
         if (lastExpr?.type === 'inc-ptr') {
           lastExpr.delta++
