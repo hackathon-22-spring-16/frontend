@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const headers = useState('headers')
+const headers = useHeaders()
 onMounted(() => {
   console.log(headers.value)
 })

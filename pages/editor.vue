@@ -39,7 +39,7 @@ const toggleRunning = () => {
     <v-card-text>
       <v-row class="button-container">
         <v-btn
-          :icon="isRunning && !turtleCanvas.isPause ? 'mdi-pause' : 'mdi-play'"
+          :icon="isRunning && !turtleCanvas?.isPause ? 'mdi-pause' : 'mdi-play'"
           color="primary"
           @click="toggleRunning"
         />

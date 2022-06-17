@@ -82,7 +82,7 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 const canvasTopRef = ref<HTMLCanvasElement | null>(null)
 
 const isPause = ref(false)
-const pauseResolve = ref<(value: boolean) => void>(null)
+const pauseResolve = ref<((value: boolean) => void) | null>(null)
 
 interface TurtleState {
   x: number
@@ -116,6 +116,9 @@ const start = () => {
   }
   const ctx = canvasRef.value.getContext('2d')
   const ctxTop = canvasTopRef.value.getContext('2d')
+  if (ctx === null || ctxTop === null) {
+    return
+  }
   ctx.clearRect(0, 0, canvasRef.value.width, canvasRef.value.height)
   ctxTop.clearRect(0, 0, canvasTopRef.value.width, canvasTopRef.value.height)
 
@@ -248,7 +251,8 @@ const start = () => {
       }
     }
 
-    ctxTop.clearRect(0, 0, canvasTopRef.value.width, canvasTopRef.value.height)
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    ctxTop.clearRect(0, 0, canvasTopRef.value!.width, canvasTopRef.value!.height)
     ctxTop.fillStyle = '#000000'
     ctxTop.beginPath()
     ctxTop.moveTo(

@@ -100,10 +100,10 @@ export const transpile = (code: string): TranspilerExpr[] | string => {
       }
       case ']': {
         popLastExpr()
-        if (loopStack.length === 0) {
+        const startIdx = loopStack.pop()
+        if (startIdx === undefined) {
           return `Error: ] without matching [ at ${i}`
         }
-        const startIdx = loopStack.pop()
         const endIdx = transpiled.length
         transpiled[startIdx] = { type: 'loop-start', endIdx }
         transpiled.push({ type: 'loop-end', startIdx })

@@ -13,7 +13,7 @@ const { data: serverHeaders } = await useAsyncData(
     return headers
   }
 )
-useState('headers', () => serverHeaders)
+useHeadersWithDefault(serverHeaders)
 </script>
 
 <template>
