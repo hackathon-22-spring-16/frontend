@@ -1,0 +1,42 @@
+@top Program {
+  expression*
+}
+
+@skip {
+  space |
+  LineComment |
+  BlockComment
+}
+
+expression {
+  PtrIdentifier |
+  ValueIdentifier |
+  TurtleIdentifier |
+  Application {
+    "[" expression* "]"
+  }
+}
+
+@tokens {
+  PtrIdentifier {
+    ">" | "<"
+  }
+  ValueIdentifier {
+    "+" | "-" | ","
+  }
+  TurtleIdentifier {
+    "f" | "b" | "l" | "r" | "x" | "y" | "h" | "d" | "U" | "D"
+  }
+  LineComment {
+    "#" ![\n]*
+  }
+  BlockComment {
+    "{" ![}]* "}"
+  }
+  space {
+    $[ \t\n\r]+
+  }
+  "[" "]"
+}
+
+@detectDelim
