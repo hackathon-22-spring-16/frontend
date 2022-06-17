@@ -21,3 +21,12 @@ useHeadersWithDefault(serverHeaders)
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style lang="scss">
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.mono {
+  font-family: 'Roboto Mono', monospace;
+}
+</style>
