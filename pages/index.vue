@@ -1,4 +1,7 @@
+vue
 <script setup lang="ts">
+import CodeEditor from '@/components/CodeEditor.vue'
+
 const count = ref(0)
 </script>
 
@@ -8,6 +11,7 @@ const count = ref(0)
     <v-card-text>
       <v-btn @click="count++"> count: {{ count }} </v-btn>
       <nuxt-link to="/editor">test</nuxt-link>
+      <code-editor />
     </v-card-text>
   </v-card>
 </template>
