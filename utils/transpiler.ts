@@ -35,7 +35,11 @@ export const transpile = (code: string): TranspilerExpr[] | string => {
   let lastExpr: TranspilerExpr | null = null
   const popLastExpr = () => {
     if (lastExpr !== null) {
-      // TODO: Inc が 0 なら消せそう
+      // delta が 0 の場合は何もしなくてよい
+      if ((lastExpr.type === 'inc-ptr' || lastExpr.type === 'inc-val') && lastExpr.delta === 0) {
+        lastExpr = null
+        return
+      }
       transpiled.push(lastExpr)
       lastExpr = null
     }
@@ -80,7 +84,10 @@ export const transpile = (code: string): TranspilerExpr[] | string => {
         break
       }
       case ',': {
-        // TODO: もしこれより前が val-inc なら、val-inc は消せそう
+        // この前が inc-val なら上書きされるため無視できる
+        if (lastExpr?.type === 'inc-val') {
+          lastExpr = null
+        }
         popLastExpr()
         transpiled.push({ type: 'stdin' })
         break
