@@ -9,7 +9,7 @@ const drawInterval = ref(100)
 const isRunning = ref(false)
 
 const nextCommand = () => runCode(
-  'D,>,[-<+>]++++++++++++++++++++rrr[f<l>+++++]',
+  'D,>,[-<+>]{F + d で 170 が入る (角度として使う)}++++++++++++++++++++{+20}rrr{位置調整}[f<l>+++++]{長さを増やしながら回転}',
   'Fd'
 )
 
