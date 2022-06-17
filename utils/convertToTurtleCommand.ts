@@ -1,4 +1,4 @@
-import { TurtleCommand } from '@/components/TurtleCanvas.vue.__VLS_script'
+import { TurtleCommand } from '@/components/TurtleCanvas.vue'
 
 export const convertToTurtleCommand = (
   command: string,
