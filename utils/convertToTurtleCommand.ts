@@ -28,3 +28,6 @@ export const convertMap: Map<string, (val: number) => TurtleCommand> = new Map([
     _val => ({ type: '_NEVER_USED_' } as unknown as TurtleCommand),
   ],
 ])
+export const plainCommands = new Set(
+  Array.from(convertMap.keys()).filter(x => x !== '_NEVER_USED_')
+)
