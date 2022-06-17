@@ -1,3 +1,5 @@
+import { plainCommands } from "./convertToTurtleCommand"
+
 export interface IncPtr {
   type: 'inc-ptr'
   delta: number
@@ -113,7 +115,7 @@ export const transpile = (code: string): TranspilerExpr[] | string => {
         return 'Error: . is not supported'
       }
       default: {
-        if (/^[a-zA-Z]$/.test(c)) {
+        if (plainCommands.has(c)) {
           popLastExpr()
           transpiled.push({ type: 'turtle-command', command: c })
         } else if (/^\s$/.test(c)) {
