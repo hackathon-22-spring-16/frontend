@@ -1,19 +1,16 @@
 <script setup lang="ts">
 const headers = useHeaders()
-onMounted(() => {
-  console.log(headers.value)
-})
 </script>
 
 <template>
   <v-app>
-    <v-app-bar>
+    <v-app-bar class="app-bar">
       <div class="app-bar-contents">
-        <nuxt-link to="/">
-          サービス名
+        <nuxt-link to="/" class="top-link">
+          <img src="@/assets/Title.svg" draggable="false" />
         </nuxt-link>
 
-        <v-avatar>
+        <v-avatar v-if="headers['x-showcase-user'] !== '-'" class="right-icon">
           <img
             :src="`https://q.trap.jp/api/1.0/public/icon/${
               headers['x-showcase-user'] ?? 'traP'
@@ -26,7 +23,9 @@ onMounted(() => {
         </v-avatar>
       </div>
     </v-app-bar>
-    <v-main class="main"> content <slot /></v-main>
+    <v-main class="main">
+      <slot />
+    </v-main>
   </v-app>
 </template>
 
