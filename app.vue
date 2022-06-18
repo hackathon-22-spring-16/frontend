@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 // HACK: SSR の際に vuetify が崩れるときがあるので、mount されるまで待つ
 // もし他のとこでやばいことになったら外す
 const isLoading = ref(true)
@@ -13,7 +13,7 @@ const { data: serverHeaders } = await useAsyncData(
     return headers
   }
 )
-useHeadersWithDefault(serverHeaders)
+useHeadersWithDefault(serverHeaders.value)
 </script>
 
 <template>
