@@ -2,19 +2,9 @@ import { transpile, TranspilerExpr } from './transpiler'
 import { convertToTurtleCommand } from './convertToTurtleCommand'
 import { TurtleCommand } from '@/components/TurtleCanvas.vue'
 
-const byteMax = 2048
+type Cell = number
 
-type Byte = number
-const addAsByte = (a: Byte, b: number): Byte => {
-  let sum = a + b
-  sum %= byteMax
-  if (sum < 0) {
-    sum += byteMax
-  }
-  return sum
-}
-
-const extendMemory = (memory: Byte[], minSize: number) => {
+const extendMemory = (memory: Cell[], minSize: number) => {
   while (minSize >= memory.length) {
     const extend = new Array(memory.length).fill(0)
     memory.push(...extend)
@@ -23,25 +13,38 @@ const extendMemory = (memory: Byte[], minSize: number) => {
 
 interface State {
   ptr: number
-  memory_non_negative: Byte[]
-  memory_negative: Byte[]
+  memory_non_negative: Cell[]
+  memory_negative: Cell[]
   idx: number
   transpiled: TranspilerExpr[]
   inputIdx: number
 }
+export interface RunCodeOptions {
+  cellMax?: number
+}
 export const runCode: (
   code: string,
-  stdin: string
-) => Generator<TurtleCommand, never, unknown> = function* (code, stdin) {
+  stdin: string,
+  options?: RunCodeOptions
+) => Generator<TurtleCommand, never, unknown> = function* (code, stdin, options) {
   const transpiled = transpile(code)
   if (typeof transpiled === 'string') {
     throw new TypeError(transpiled)
   }
+  const { cellMax = 1024 } = options ?? {}
+  const addCell = (cell: Cell, delta: number): Cell => {
+    let result = cell + delta
+    result %= cellMax
+    if (result < 0) {
+      result += cellMax
+    }
+    return result
+  }
   const stdinAsBytes = new TextEncoder().encode(stdin)
   const state: State = {
     ptr: 0,
-    memory_non_negative: new Array(byteMax).fill(0),
-    memory_negative: new Array(byteMax).fill(0),
+    memory_non_negative: new Array(512).fill(0),
+    memory_negative: new Array(512).fill(0),
     idx: 0,
     transpiled,
     inputIdx: 0,
@@ -70,13 +73,13 @@ export const runCode: (
         if (state.ptr < 0) {
           const negPtr = -state.ptr - 1
           extendMemory(state.memory_negative, negPtr)
-          state.memory_negative[negPtr] = addAsByte(
+          state.memory_negative[negPtr] = addCell(
             state.memory_negative[negPtr],
             expr.delta
           )
         } else {
           extendMemory(state.memory_non_negative, state.ptr)
-          state.memory_non_negative[state.ptr] = addAsByte(
+          state.memory_non_negative[state.ptr] = addCell(
             state.memory_non_negative[state.ptr],
             expr.delta
           )
