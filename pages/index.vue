@@ -116,7 +116,9 @@ const endTurtleAnimationHandler = () => {
 
 const isLoading = ref(true)
 onMounted(() => {
-  isLoading.value = false
+  nextTick(() => {
+    isLoading.value = false
+  })
 })
 
 const loadingBgRef = ref<HTMLDivElement | null>(null)
@@ -227,7 +229,6 @@ onMounted(() => {
       height: 100%;
       max-height: 100vh;
       z-index: -1;
-
 
       &.layer-0 {
         background-color: #08083c;
