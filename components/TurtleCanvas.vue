@@ -76,6 +76,7 @@ export interface Props {
   intervalMs: number
   isRainbow?: boolean
   bordered?: boolean
+  isHiddenTurtle?: boolean
 }
 const props = defineProps<Props>()
 
@@ -348,6 +349,9 @@ defineExpose({
       :width="props.width"
       :height="props.height"
       class="top-layer"
+      :class="{
+        hidden: props.isHiddenTurtle ?? false,
+      }"
     />
   </div>
 </template>
@@ -367,6 +371,9 @@ defineExpose({
     top: 0;
     left: 0;
     pointer-events: none;
+    &.hidden {
+      display: none;
+    }
   }
 }
 </style>
