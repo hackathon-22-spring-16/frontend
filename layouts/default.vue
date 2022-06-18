@@ -31,11 +31,25 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+.app-bar {
+  background-image: linear-gradient(
+    to left,
+    #2e2069,
+    #08083c,
+  );
+}
 .app-bar-contents {
   display: flex;
   width: 100%;
+  max-height: 100%;
   justify-content: space-between;
   align-items: center;
+}
+.top-link {
+  max-height: 32px;
+  & > img {
+    max-height: 32px;
+  }
 }
 .icon-img {
   height: 100%;
