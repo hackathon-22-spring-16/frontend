@@ -1,5 +1,31 @@
-<script setup>
+<script setup lang="ts">
 import { Codemirror } from 'vue-codemirror'
+
+const props = withDefaults(
+  defineProps<{
+    modelValue: string
+  }>(),
+  {
+    modelValue: '', // デフォルト値を指定
+  }
+)
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', text: string): string
+}>()
+
+const code = computed({
+  get: () => props.modelValue,
+  set: value => {
+    // 値に変更があると呼ばれるsetter
+    emit('update:modelValue', value)
+  },
+})
+
+const onClick = () => {
+  console.log(code.value)
+  emit('update:modelValue', code.value)
+}
 </script>
 
 <template>
@@ -26,7 +52,12 @@ import { Codemirror } from 'vue-codemirror'
     />
 
     <div>
-      <v-btn class="exe_button" rounded color="primary" padding="100px"
+      <v-btn
+        class="exe_button"
+        rounded
+        color="primary"
+        padding="100px"
+        @click="onClick"
         >実行</v-btn
       >
     </div>

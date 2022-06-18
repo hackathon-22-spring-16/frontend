@@ -1,5 +1,5 @@
 vue
-<script setup lang="ts">
+<script setup lang="ts
 import { loadFull } from 'tsparticles'
 import { Engine } from 'tsparticles-engine'
 import { runCode } from '@/utils/runCode'
