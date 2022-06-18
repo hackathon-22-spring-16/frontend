@@ -8,7 +8,7 @@
     "url": "https://github.com/hackathon-22-spring-16/frontend.git"
   },
   "scripts": {
-    "build": "nuxi build",
+    "build": "yarn lezer-gen && nuxi build",
     "dev": "nuxi dev --port 8080",
     "generate": "nuxi generate",
     "preview": "nuxi preview",
@@ -18,9 +18,11 @@
     "lint:prettier": "prettier '**/*.{js,ts,vue}' --check --ignore-path .gitignore",
     "fix": "run-p fix:*",
     "fix:eslint": "yarn lint:eslint --fix",
-    "fix:prettier": "yarn lint:prettier --write"
+    "fix:prettier": "yarn lint:prettier --write",
+    "lezer-gen": "lezer-generator ./utils/language/syntax.grammar -o ./utils/language/output/syntax.js"
   },
   "devDependencies": {
+    "@lezer/generator": "^1.0.0",
     "@mdi/font": "^6.7.96",
     "@mdi/js": "^6.7.96",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
@@ -39,6 +41,7 @@
     "node": "^17.3.1"
   },
   "dependencies": {
+    "@codemirror/language": "^6.0.0",
     "@types/codemirror": "^5.60.5",
     "axios": "^0.27.2",
     "codemirror": "^6.0.0",
