@@ -75,6 +75,7 @@ export interface Props {
   algorithm: TurtleCommandGenerator
   intervalMs: number
   isRainbow?: boolean
+  bordered?: boolean
 }
 const props = defineProps<Props>()
 
@@ -330,18 +331,23 @@ defineExpose({
 </script>
 
 <template>
-  <div class="turtle-canvas-wrapper">
+  <div
+    class="turtle-canvas-wrapper"
+    :class="{
+      bordered: props.bordered,
+    }"
+  >
     <canvas
       ref="canvasRef"
       :width="props.width"
       :height="props.height"
-      class="canvas"
+      class="main-canvas"
     />
     <canvas
       ref="canvasTopRef"
       :width="props.width"
       :height="props.height"
-      class="canvas top-layer"
+      class="top-layer"
     />
   </div>
 </template>
@@ -349,17 +355,18 @@ defineExpose({
 <style lang="scss" scoped>
 .turtle-canvas-wrapper {
   position: relative;
-  width: v-bind('`${width}px`');
-  height: v-bind('`${height}px`');
-  & > canvas {
+  &.bordered {
+    border: 1px solid #ccc;
+  }
+  & > .main-canvas {
+    max-width: 100%;
+  }
+  & > .top-layer {
+    max-width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-
-    border: 1px solid #ccc;
-    &.top-layer {
-      pointer-events: none;
-    }
+    pointer-events: none;
   }
 }
 </style>
