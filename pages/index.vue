@@ -4,7 +4,8 @@ import { Engine } from 'tsparticles-engine'
 import { runCode } from '@/utils/runCode'
 import TurtleCanvas from '@/components/TurtleCanvas.vue'
 import { startParticleOptions } from '~~/utils/startParticle'
-import { TopTitle } from '~~/.nuxt/components'
+import TopTitle from '~/components/TopTitle.vue'
+import TopPageLink from '~/components/TopPageLink.vue'
 
 definePageMeta({
   layout: false,
@@ -137,6 +138,7 @@ onMounted(() => {
       <div class="bg-layer layer-0" />
       <div class="bg-layer layer-1" />
       <div class="bg-layer layer-2" />
+
       <div
         ref="loadingBgRef"
         class="bg-layer layer-loading"
@@ -166,8 +168,8 @@ onMounted(() => {
       />
       <top-title :animation-start="titleAnimationStart" />
       <div class="top-main-container"></div>
-      <div class="top-main-canvas-container">
-        <nuxt-link to="/editor"> コードを見る </nuxt-link>
+      <div class="top-main-bottom-button">
+        <top-page-link to="/editor">Code Editor</top-page-link>
       </div>
     </div>
   </div>
@@ -222,7 +224,8 @@ onMounted(() => {
     }
 
     .bg-layer {
-      position: absolute;
+      /* position: absolute; */
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -280,6 +283,11 @@ onMounted(() => {
         top: 16px;
       }
     }
+  }
+}
+.top-main-bottom-button {
+  margin: {
+    bottom: 36px;
   }
 }
 </style>
