@@ -112,7 +112,7 @@ const share = async () => {
       },
       credentials: 'include',
     })
-    shareUrl.value = `https://brain-t.trap.games/preview/${data.userName}/${data.hash}`
+    shareUrl.value = `http://brain-t.trap.games/preview/${data.userName}/${data.hash}`
     console.log(shareUrl.value)
     shareUrlPreviewDialog.value = true
   } catch (e) {
@@ -150,7 +150,7 @@ const loginRedirect = () => {
   localStorage.setItem('braint-code', code.value)
   localStorage.setItem('braint-stdin', stdin.value)
   window.location.href =
-    'https://portal.trap.jp/pipeline?redirect=https://brain-t.trap.games/editor'
+    'https://portal.trap.jp/pipeline?redirect=http://brain-t.trap.games/editor'
 }
 onMounted(() => {
   const codeStorage = localStorage.getItem('braint-code')
