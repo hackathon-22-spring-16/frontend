@@ -359,8 +359,10 @@ defineExpose({
 <style lang="scss" scoped>
 .turtle-canvas-wrapper {
   position: relative;
-  &.bordered {
-    border: 1px solid #ccc;
+  aspect-ratio: auto v-bind('props.width') / v-bind('props.height');
+  height: fit-content;
+  &.bordered > .main-canvas {
+    outline: 1px solid #ccc;
   }
   & > .main-canvas {
     max-width: 100%;

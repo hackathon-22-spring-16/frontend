@@ -31,11 +31,7 @@ const headers = useHeaders()
 
 <style lang="scss" scoped>
 .app-bar {
-  background-image: linear-gradient(
-    to left,
-    #2e2069,
-    #08083c,
-  );
+  background-image: linear-gradient(to left, #2e2069, #08083c);
 }
 .app-bar-contents {
   display: flex;
