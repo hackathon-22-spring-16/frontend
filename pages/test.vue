@@ -1,6 +1,6 @@
 <script setup>
 const res = await useFetch(
-  `http://brain-t.api.trap.games/get-code/${route.params.username}/${route.params.hash}`
+  `https://brain-t.api.trap.games/get-code/SSlime/GjCDrRju`
 )
 onMounted(() => {
   console.log(res)
