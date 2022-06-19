@@ -92,6 +92,7 @@ const toggleRunning = () => {
 
 const isShareLoading = ref(false)
 const shareUrl = ref('')
+const shareUrlPreviewDialog = ref(false)
 const share = async () => {
   if (isShareLoading.value) {
     return
@@ -113,10 +114,24 @@ const share = async () => {
     })
     shareUrl.value = `https://brain-t.trap.games/preview/${data.userName}/${data.hash}`
     console.log(shareUrl.value)
+    shareUrlPreviewDialog.value = true
   } catch (e) {
     console.error(e)
   } finally {
     isShareLoading.value = false
+  }
+}
+const copyState = ref<'success' | 'error' | 'default'>('default')
+const copyShareUrl = async () => {
+  try {
+    await navigator.clipboard.writeText(shareUrl.value)
+    copyState.value = 'success'
+  } catch (e) {
+    copyState.value = 'error'
+  } finally {
+    setTimeout(() => {
+      copyState.value = 'default'
+    }, 800)
   }
 }
 const loginConfirmDialog = ref(false)
@@ -236,6 +251,42 @@ onMounted(() => {
                 ログイン処理を行う
               </v-btn>
             </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+        <v-dialog v-model="shareUrlPreviewDialog" max-width="500px">
+          <v-card>
+            <v-card-title> 共有用 URL </v-card-title>
+            <v-card-text>
+              <div class="copy-container">
+                <v-text-field
+                  v-model="shareUrl"
+                  class="mt-0 pt-0"
+                  hide-details
+                  single-line
+                />
+                <v-btn
+                  :color="
+                    copyState === 'success'
+                      ? 'success'
+                      : copyState === 'error'
+                      ? 'error'
+                      : 'primary'
+                  "
+                  @click="copyShareUrl"
+                >
+                  <v-icon>
+                    {{
+                      copyState === 'success'
+                        ? 'mdi-check'
+                        : copyState === 'error'
+                        ? 'mdi-close'
+                        : 'mdi-content-copy'
+                    }}
+                  </v-icon>
+                </v-btn>
+              </div>
+            </v-card-text>
           </v-card>
         </v-dialog>
       </div>
@@ -370,5 +421,12 @@ onMounted(() => {
     justify-items: center;
     gap: 16px;
   }
+}
+.copy-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  min-width: 360px;
 }
 </style>
