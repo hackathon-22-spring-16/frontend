@@ -150,7 +150,7 @@ const loginRedirect = () => {
   localStorage.setItem('braint-code', code.value)
   localStorage.setItem('braint-stdin', stdin.value)
   window.location.href =
-    'https://portal.trap.jp/pipeline?redirect=brain-t.trap.games'
+    'https://portal.trap.jp/pipeline?redirect=https://brain-t.trap.games/editor'
 }
 onMounted(() => {
   const codeStorage = localStorage.getItem('braint-code')
