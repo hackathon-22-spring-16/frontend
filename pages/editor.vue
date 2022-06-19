@@ -79,7 +79,7 @@ const share = async () => {
         userName: string
         hash: string
       }
-    } = await $fetch(`${process.env.apiBaseUrl}/share`, {
+    } = await $fetch(`${https://brain-t.api.trap.games}/share`, {
       method: 'POST',
       body: {
         code: code.value,
@@ -87,7 +87,7 @@ const share = async () => {
       },
       credentials: 'include',
     })
-    shareUrl.value = `${process.env.baseUrl}/preview/${data.userName}/${data.hash}`
+    shareUrl.value = `${https://brain-t.trap.games}/preview/${data.userName}/${data.hash}`
     console.log(shareUrl.value)
   } catch (e) {
     console.error(e)
