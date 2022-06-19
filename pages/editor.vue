@@ -139,7 +139,7 @@ const tryShare = () => {
   if (isShareLoading.value) {
     return
   }
-  if (!headers.value['x-showcase-user']) {
+  if (!headers.value['x-showcase-user'] || headers.value['x-showcase-user'] === '-') {
     loginConfirmDialog.value = true
     return
   }
