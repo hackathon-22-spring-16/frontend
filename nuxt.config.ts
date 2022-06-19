@@ -20,4 +20,8 @@ export default defineNuxtConfig({
       },
     ],
   },
+  env: {
+    baseUrl: 'https://brain-t.trap.games',
+    apiBaseUrl: 'https://brain-t.api.trap.games',
+  },
 })
