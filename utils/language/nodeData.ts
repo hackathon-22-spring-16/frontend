@@ -1,4 +1,10 @@
-import { foldNodeProp, foldInside, indentNodeProp, LRLanguage, LanguageSupport } from '@codemirror/language'
+import {
+  foldNodeProp,
+  foldInside,
+  indentNodeProp,
+  LRLanguage,
+  LanguageSupport,
+} from '@codemirror/language'
 import { styleTags, tags as t } from '@lezer/highlight'
 import { parser } from './output/syntax'
 
@@ -10,15 +16,15 @@ const parserWithMetadata = parser.configure({
       TurtleIdentifier: t.keyword,
       LineComment: t.lineComment,
       BlockComment: t.blockComment,
-      "[ ]": t.squareBracket,
+      '[ ]': t.squareBracket,
     }),
     indentNodeProp.add({
-      Application: context => context.column(context.node.from) + context.unit
+      Application: context => context.column(context.node.from) + context.unit,
     }),
     foldNodeProp.add({
       Application: foldInside,
     }),
-  ]
+  ],
 })
 
 export const language = LRLanguage.define({
@@ -28,7 +34,7 @@ export const language = LRLanguage.define({
       line: '#',
       block: ['{', '}'],
     },
-  }
+  },
 })
 
 export function getSupport() {

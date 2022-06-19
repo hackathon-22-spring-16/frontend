@@ -26,7 +26,11 @@ export const runCode: (
   code: string,
   stdin: string,
   options?: RunCodeOptions
-) => Generator<TurtleCommand, never, unknown> = function* (code, stdin, options) {
+) => Generator<TurtleCommand, never, unknown> = function* (
+  code,
+  stdin,
+  options
+) {
   const transpiled = transpile(code)
   if (typeof transpiled === 'string') {
     throw new TypeError(transpiled)
