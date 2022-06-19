@@ -6,9 +6,9 @@ const headers = useHeaders()
   <v-app>
     <v-app-bar class="app-bar">
       <div class="app-bar-contents">
-        <nuxt-link to="/" class="top-link">
+        <a href="/" class="top-link">
           <img src="@/assets/Title.svg" draggable="false" />
-        </nuxt-link>
+        </a>
 
         <v-avatar v-if="headers['x-showcase-user'] !== '-'" class="right-icon">
           <img
