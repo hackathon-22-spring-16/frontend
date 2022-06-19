@@ -9,10 +9,36 @@ const drawInterval = ref(50)
 
 const isRunning = ref(false)
 
-const code = ref(
-  'D,>,[-<+>]{F + d で 170 が入る (角度として使う)}++++++++++++++++++++{+20}rrr{位置調整}[f<l>+++++]{長さを増やしながら回転}\n'
-)
-const stdin = ref('Fd')
+const code = ref(`# Top Page Animation
+{
+Manual
+  f: forword
+  b: backword
+  l: left turn
+  r: right turn
+  x: set x
+  y: set y
+  h: set to home
+  d: set direction
+  U: pen up
+  D: pen down
+show detail -> https://docs.python.org/ja/3/library/turtle.html
+}
+                            ,r++>,rfDll>++++++++++f
+              <rr>+++++++++++++++++++++++++f<r>>++++++++++f<<r>>f<
+     <r>f<rr>>f<<l<f>l>>+++++f<<rr>----------f<r>>f<<r>>f<<r>f<rr>>f<<l<f>l>>f<<rr>
+  f<r>>f<<r>>f<<r>f<rr>>f<<l<f>l>>+++++f<<rr>++++++++++f<r>>f<<r>>f<<r>f<rr>>f<<l<f>l>>---
+--f<<rr>----------f<r>>f<<r>>f<<r>f<rr>>f<<l<f>l>>f<<rr>f<r>>f<<r>>f<<r>f<rr>>f<<l<f>>>>>++
++++[-<+++++>]<--<<<l>>>f<<<l>>>f<<<r>>>f<<<r>>>fD<<<l>>>f<<<l>>>f<<<l>>>Df<<<l>>>f<<<l>>>f<<<
+r>>>f<<<r>>>f<<<l>>>f<<<l>>>f<<<rr>>>ff<<<rr>>>f<<<r>>>f<<<l>>>f<<<l>>>f<<<r>>>f<<<r>>>f<<<l>
+>>f<<<l>>>f<<<r>>>fb<<<ll>>>f<<<l>>>f<<<l>>>f<<<r>>>f<<<r>>>f<<<l>>>f<<<l>>>fU<<<rr>>>ffD<<
+ <rr>>>f<<<r>>>f<<<l>>>f<<<l>>>f<<<r>>>f<<<r>>>f<<<l>>>f<<<l>>>f<<<r>>>f
+    b<<<ll>>>f<<<l>>>f<<<l>>>f<<<r>>>f<<<r>>>f<<<l>>>f<<<l>>>f
+            b<<<rr>>>fb<<<rr>>>f<<<l>>>f<<<l>>>fb<<<rr>>>
+                    f<<<l>>>fb<<<rr>>>f<<<l>>>f
+                                <<<l>>>f
+`)
+const stdin = ref('Z<d')
 
 const nextCommand = () => {
   return runCodeMiddleware()
