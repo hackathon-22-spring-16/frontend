@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Ref } from '@vue/runtime-dom';
 import { runCode } from '~~/utils/runCode'
 import TurtleCanvas from '@/components/TurtleCanvas.vue'
 
@@ -7,15 +8,16 @@ const router = useRouter()
 const {
   data,
 }: {
-  data: {
+  data: Ref<{
     plainCode: string
     stdin: string
     title: string
     options: string
-  }
+  }>
 } = await useFetch(
   `http://brain-t.api.trap.games/get-code/${route.params.username}/${route.params.hash}`
-)
+  // 'http://brain-t.api.trap.games/get-code/SSlime/GjCDrRju'
+) as any
 // const data = reactive({
 //   plainCode: `{
 // 90 60 20+ 5+
@@ -84,11 +86,11 @@ const {
 //   title: 'dummy',
 // })
 
-const nextCommand = () => runCode(data.plainCode, data.stdin)
+const nextCommand = () => runCode(data.value.plainCode, data.value.stdin)
 
 const toEditor = () => {
-  localStorage.setItem('braint-code', data.plainCode)
-  localStorage.setItem('braint-stdin', data.stdin)
+  localStorage.setItem('braint-code', data.value.plainCode)
+  localStorage.setItem('braint-stdin', data.value.stdin)
   router.push('/editor')
 }
 
