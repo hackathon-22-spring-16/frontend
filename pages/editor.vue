@@ -104,8 +104,10 @@ const share = async () => {
     } = await $fetch(`https://brain-t.api.trap.games/share`, {
       method: 'POST',
       body: {
-        code: code.value,
+        plainCode: code.value,
         stdin: stdin.value,
+        title: '',
+        options: '',
       },
       credentials: 'include',
     })
