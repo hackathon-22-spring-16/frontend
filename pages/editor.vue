@@ -102,7 +102,7 @@ const share = async () => {
     const data: {
       userName: string
       hash: string
-    } = await $fetch(`https://brain-t.api.trap.games/share`, {
+    } = await $fetch(`http://brain-t.api.trap.games/share`, {
       method: 'POST',
       body: {
         plainCode: code.value,

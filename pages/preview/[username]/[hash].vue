@@ -14,7 +14,7 @@ const {
     options: string
   }
 } = await useFetch(
-  `https://brain-t.api.trap.games/get-code/${route.params.username}/${route.params.hash}`
+  `http://brain-t.api.trap.games/get-code/${route.params.username}/${route.params.hash}`
 )
 // const data = reactive({
 //   plainCode: `{
