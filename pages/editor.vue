@@ -113,6 +113,7 @@ const share = async () => {
       },
       credentials: 'include',
     })
+    console.log(data)
     shareUrl.value = `https://brain-t.trap.games/preview/${data.userName}/${data.hash}`
     console.log(shareUrl.value)
   } catch (e) {
