@@ -85,6 +85,7 @@ const share = async () => {
         code: code.value,
         stdin: stdin.value,
       },
+      credentials: 'include',
     })
     shareUrl.value = `${process.env.baseUrl}/preview/${data.userName}/${data.hash}`
     console.log(shareUrl.value)
