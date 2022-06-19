@@ -18,6 +18,9 @@ useHeadersWithDefault(serverHeaders.value)
 
 <template>
   <NuxtLayout v-show="!isLoading">
+    <Head>
+      <Html lang="ja" />
+    </Head>
     <NuxtPage />
   </NuxtLayout>
 </template>
