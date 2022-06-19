@@ -98,7 +98,10 @@ const share = async () => {
   }
   isShareLoading.value = true
   try {
-    const res = await $fetch(`https://brain-t.api.trap.games/share`, {
+    const data: {
+      userName: string
+      hash: string
+    } = await $fetch(`https://brain-t.api.trap.games/share`, {
       method: 'POST',
       body: {
         code: code.value,
@@ -106,11 +109,6 @@ const share = async () => {
       },
       credentials: 'include',
     })
-    console.log(res)
-    const data: {
-      userName: string
-      hash: string
-    } = res.json
     shareUrl.value = `https://brain-t.trap.games/preview/${data.userName}/${data.hash}`
     console.log(shareUrl.value)
   } catch (e) {
